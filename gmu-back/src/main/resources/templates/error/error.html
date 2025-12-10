@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error 404 - Página No Encontrada</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-p1CmX0b+fJrYf0gZC3b7+VYc+XhKxKfJHhFJjv8yP1Qx5E8wBv3eU1d5D+1R9v8X5r8+Yx1Zk8z7m1e2L4v3A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        :root {
+            --primary: #083371;
+            --secondary: #329f86;
+            --light: #ffffff;
+            --dark: #1a1a2e;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: var(--primary);
+            color: var(--light);
+            overflow: hidden;
+        }
+        #tsparticles {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: -1;
+        }
+        .container {
+            position: relative;
+            z-index: 1;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 2rem;
+        }
+        .glitch {
+            font-size: 8rem;
+            font-weight: 700;
+            position: relative;
+            color: var(--light);
+            animation: glitch 1s infinite;
+        }
+        @keyframes glitch {
+            0% { text-shadow: 2px 0 var(--secondary); }
+            20% { text-shadow: -2px 0 var(--secondary); }
+            40% { text-shadow: 2px 0 var(--secondary); }
+            60% { text-shadow: -2px 0 var(--secondary); }
+            80% { text-shadow: 2px 0 var(--secondary); }
+            100% { text-shadow: 0 0 var(--light); }
+        }
+        .typewriter {
+            font-size: 2rem;
+            margin: 1rem 0;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: .15em solid var(--light);
+            animation: type 3s steps(30) 1s forwards;
+        }
+        @keyframes type {
+            from { width: 0; }
+            to { width: 100%; border-right: none; }
+        }
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+        .search {
+            margin: 1.5rem 0;
+            position: relative;
+        }
+        .search input {
+            padding: 0.75rem 1rem;
+            border-radius: 2rem;
+            border: none;
+            width: 300px;
+            max-width: 80vw;
+            outline: none;
+        }
+        .search button {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            background: none;
+            color: var(--secondary);
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 1rem;
+            background: var(--light);
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 700;
+            transition: transform 0.3s ease;
+        }
+        .btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+        .socials {
+            position: fixed;
+            bottom: 1rem;
+            right: 1rem;
+            display: flex;
+            gap: 1rem;
+        }
+        .socials a {
+            font-size: 1.5rem;
+            color: var(--light);
+            transition: transform 0.3s;
+        }
+        .socials a:hover { transform: scale(1.2); }
+        #theme-toggle {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--light);
+            cursor: pointer;
+        }
+        body.light {
+            background: var(--light);
+            color: var(--primary);
+        }
+        body.light .btn { background: var(--primary); color: var(--light); }
+        body.light .socials a,
+        body.light #theme-toggle { color: var(--primary); }
+    </style>
+</head>
+<body>
+<div id="tsparticles"></div>
+<button id="theme-toggle" aria-label="Toggle Theme">🌙</button>
+<div class="container">
+    <div class="glitch">404</div>
+    <div class="typewriter">¡Oops! Página No Encontrada</div>
+    <p>Lo sentimos, la página que buscas no existe.</p>
+    <div class="search">
+        <input type="text" placeholder="¿Qué buscas?">
+        <button aria-label="Buscar"><i class="fas fa-search"></i></button>
+    </div>
+    <a href="/" class="btn">Volver al inicio</a>
+</div>
+<div class="socials">
+    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+    <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/tsparticles@2.3.4/tsparticles.bundle.min.js"></script>
+<script>
+    tsParticles.load("tsparticles", {
+        fpsLimit: 60,
+        particles: {
+            number: { value: 60, density: { enable: true, area: 800 } },
+            color: { value: "#ffffff" },
+            shape: { type: "circle" },
+            opacity: { value: 0.3 },
+            size: { value: { min: 1, max: 3 } },
+            move: { enable: true, speed: 2, direction: "none", outModes: { default: "out" } }
+        },
+        interactivity: {
+            events: {
+                onHover: { enable: true, mode: "repulse" },
+                onClick: { enable: true, mode: "push" }
+            },
+            modes: { repulse: { distance: 100 }, push: { quantity: 4 } }
+        },
+        detectRetina: true
+    });
+    const toggle = document.getElementById('theme-toggle');
+    toggle.addEventListener('click', () => {
+        document.body.classList.toggle('light');
+        toggle.textContent = document.body.classList.contains('light') ? '🌙' : '☀️';
+    });
+</script>
+</body>
+</html>

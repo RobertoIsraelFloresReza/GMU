@@ -1,0 +1,66 @@
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# IDE
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+.settings/
+.classpath
+.project
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs
+*.log
+logs/
+
+# Git
+.git
+.gitignore
+.gitattributes
+
+# CI/CD
+.github
+.gitlab-ci.yml
+Jenkinsfile
+
+# Docker
+Dockerfile
+.dockerignore
+docker-compose*.yml
+
+# Documentación
+README.md
+docs/
+*.md
+
+# Archivos de entorno
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Otros
+.cache
+.temp
+tmp/
+temp/
+*.tmp
+
+# Spring Boot DevTools
+spring-boot-devtools.properties

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Restablecer Contraseña | SAGG</title>
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #f8fafc; padding: 40px 20px; color: #2d3748; line-height: 1.6; max-width: 600px; margin: 0 auto;">
+
+<div style="background-color: #ffffff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); border: 1px solid #e2e8f0; overflow: hidden;">
+
+    <div style="background: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 100%); padding: 24px; text-align: center; color: #ffffff;">
+        <h1 style="margin: 0; font-size: 22px;">Restablecimiento de Contraseña</h1>
+    </div>
+
+    <div style="padding: 32px;">
+        <p>Estimado usuario,</p>
+        <p>Hemos recibido una solicitud para restablecer la contraseña asociada a tu cuenta. Por favor, utiliza el siguiente código de verificación para completar el proceso:</p>
+
+        <p style="background-color: #f3e8ff; color: #7c3aed; padding: 16px; border-radius: 8px; font-size: 24px; font-weight: bold; text-align: center; letter-spacing: 2px; margin: 24px 0; border: 1px dashed #7c3aed;"
+           th:text="${token}">[Código de restablecimiento]</p>
+
+
+        <p style="color: #4a5568; font-size: 14px; text-align: center; font-style: italic; margin-top: -16px;">
+            Este código es válido por 30 minutos.
+        </p>
+
+        <div style="height: 1px; background-color: #e2e8f0; margin: 24px 0;"></div>
+
+        <div style="text-align: center; margin: 32px 0;">
+            <a href="http://localhost:5173/reset-password" style="display: inline-block; background-color: #7c3aed; color: #ffffff; padding: 14px 28px; border-radius: 8px; text-decoration: none; font-weight: 500; font-size: 15px;">
+                Restablecer Contraseña
+            </a>
+        </div>
+
+        <div style="background-color: #f8fafc; padding: 12px 16px; border-radius: 8px; font-size: 14px; color: #4a5568; border: 1px solid #e2e8f0; margin-top: 24px;">
+            ⚠️ Por tu seguridad, nunca compartas este código con nadie.
+        </div>
+    </div>
+
+    <div style="font-size: 13px; color: #718096; text-align: center; padding: 24px; border-top: 1px solid #e2e8f0;">
+        <p>Este es un mensaje automático, por favor no respondas a este correo.</p>
+        <p>&copy; 2025 SAGG. Todos los derechos reservados.</p>
+    </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+services:
+  database:
+    image: mysql:8
+    container_name: db-gmu
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: gmu
+    ports:
+      - "3306:3306"
+    networks:
+      - gmu-net
+    volumes:
+      - gmu-data:/var/lib/mysql
+
+  frontend:
+    image: client:gmu-v1
+    container_name: fe-gmu
+    build:
+      context: ./gmu-front
+    ports:
+      - "80:443"
+    networks:
+      - gmu-net
+    volumes:
+      - certbot-certs:/etc/letsencrypt:ro
+
+  backend:
+    image: services:gmu-v1
+    container_name: be-gmu
+    build:
+      context: ./gmu-back
+    environment:
+      SERVER_PORT: 8080
+      DB_URL: jdbc:mysql://database:3306/gmu
+      DB_USER: root
+      DB_PASSWORD: root
+      SERVER_SSL_ENABLED: true
+      SERVER_SSL_KEYSTORE: /etc/letsencrypt/live/cokeraws.duckdns.org/keystore.p12
+      SERVER_SSL_KEYSTORE_PASS: COKERKEYSTOREPASS
+      JWT_SECRET: R01VLVBSMFkzQzctU1Q0TVAtMGM1MmZiZDgtMGYxYS00MzliLTkyYWYtMjc4NDYzNzAwNzI4
+    ports:
+      - "8081:8080"
+    networks:
+      - gmu-net
+    volumes:
+      - certbot-certs:/etc/letsencrypt:ro
+
+networks:
+  gmu-net:
+    external: true
+
+volumes:
+  gmu-data:
+    external: true
+  certbot-certs:
+    external: true

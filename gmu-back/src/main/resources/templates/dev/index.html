@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenido - Pruebas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-p1CmX0b+fJrYf0gZC3b7+VYc+XhKxKfJHhFJjv8yP1Qx5E8wBv3eU1d5D+1R9v8X5r8+Yx1Zk8z7m1e2L4v3A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        :root {
+            --primary-color: #4e54c8;
+            --secondary-color: #8f94fb;
+            --text-color: #ffffff;
+            --bg-light: #f0f0f0;
+            --bg-dark: #1a1a2e;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Roboto', sans-serif;
+            overflow: hidden;
+            background: var(--bg-dark);
+            color: var(--text-color);
+        }
+        #tsparticles {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: -1;
+        }
+        .container {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            height: 100vh;
+            padding: 0 2rem;
+        }
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: .15em solid var(--text-color);
+        }
+        p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        .btn {
+            padding: 1rem 2rem;
+            background: var(--text-color);
+            color: var(--primary-color);
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+        .btn:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
+        #theme-toggle {
+            position: fixed;
+            top: 1rem; right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-color);
+            z-index: 2;
+        }
+        .scroll-down {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 50px;
+            border: 2px solid var(--text-color);
+            border-radius: 25px;
+        }
+        .scroll-down::after {
+            content: '';
+            display: block;
+            width: 6px;
+            height: 6px;
+            background: var(--text-color);
+            margin: 8px auto;
+            border-radius: 50%;
+            animation: scroll 2s infinite;
+        }
+        @keyframes scroll {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(20px); }
+            100% { transform: translateY(0); }
+        }
+        .socials {
+            position: fixed;
+            bottom: 1rem;
+            right: 1rem;
+            display: flex;
+            gap: 1rem;
+            z-index: 2;
+        }
+        .socials a { font-size: 1.5rem; color: var(--text-color); transition: transform 0.3s ease; }
+        .socials a:hover { transform: scale(1.2); }
+        /* Dark/Light mode */
+        body.light { background: var(--bg-light); color: var(--primary-color); }
+        body.light .btn { color: var(--bg-light); background: var(--primary-color); }
+        body.light #theme-toggle { color: var(--primary-color); }
+        body.light .scroll-down, body.light .socials a { border-color: var(--primary-color); color: var(--primary-color); }
+    </style>
+</head>
+<body>
+<div id="tsparticles"></div>
+<button id="theme-toggle" aria-label="Toggle Theme">🌙</button>
+<div class="container">
+    <h1 id="typewriter"></h1>
+    <p>Descubre, experimenta y déjate sorprender por lo que hemos preparado para ti.</p>
+    <a href="http://localhost:5173/" class="btn">Comenzar</a>
+    <div class="scroll-down"></div>
+</div>
+<div class="socials">
+    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+    <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/tsparticles@2.3.4/tsparticles.bundle.min.js"></script>
+<script>
+    // Initialize particles
+    tsParticles.load("tsparticles", {
+        fpsLimit: 60,
+        particles: {
+            number: { value: 80, density: { enable: true, area: 800 } },
+            color: { value: "#ffffff" },
+            shape: { type: "circle" },
+            opacity: { value: 0.5 },
+            size: { value: { min: 1, max: 3 } },
+            move: { enable: true, speed: 2, direction: "none", outModes: { default: "out" } }
+        },
+        interactivity: {
+            events: {
+                onHover: { enable: true, mode: "repulse" },
+                onClick: { enable: true, mode: "push" }
+            },
+            modes: { repulse: { distance: 100 }, push: { quantity: 4 } }
+        },
+        detectRetina: true
+    });
+    // Typewriter effect
+    const text = '¡Bienvenido al entorno de Desarrollo!';
+    let index = 0;
+    function typeWriter() {
+        if (index < text.length) {
+            document.getElementById('typewriter').innerHTML += text.charAt(index);
+            index++;
+            setTimeout(typeWriter, 100);
+        } else {
+            document.getElementById('typewriter').style.borderRight = 'none';
+        }
+    }
+    document.addEventListener('DOMContentLoaded', typeWriter);
+    // Theme toggle
+    const toggle = document.getElementById('theme-toggle');
+    toggle.addEventListener('click', () => {
+        document.body.classList.toggle('light');
+        toggle.textContent = document.body.classList.contains('light') ? '🌙' : '☀️';
+    });
+</script>
+</body>
+</html>

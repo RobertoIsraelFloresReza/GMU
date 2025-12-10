@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+    <Appenders>
+        <!-- Archivo de logs -->
+        <RollingFile name="File" fileName="logs/app.log"
+                     filePattern="logs/app-%d{yyyy-MM-dd}.log.gz">
+            <PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss}] [%p] [%c{1}] - %m%n" />
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="10MB"/>
+            </Policies>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <!-- Nivel de log por defecto -->
+        <Root level="info">
+            <AppenderRef ref="File"/> <!-- Solo se mantiene la referencia al archivo -->
+        </Root>
+
+        <!-- Logger específico para tu paquete -->
+        <Logger name="utez.edu.mx.tdsw" level="debug" additivity="false">
+            <AppenderRef ref="File"/> <!-- Solo se mantiene la referencia al archivo -->
+        </Logger>
+    </Loggers>
+</Configuration>
