@@ -14,8 +14,16 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-// Initialize Firebase Cloud Messaging
-const messaging = getMessaging(app);
+// Initialize Firebase Cloud Messaging solo si está soportado
+let messaging = null;
+try {
+  // Verificar si el navegador soporta messaging
+  if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
+    messaging = getMessaging(app);
+  }
+} catch (error) {
+  console.warn('Firebase Messaging not supported in this browser:', error);
+}
 
 // VAPID Public Key (Web Push certificate)
 const VAPID_KEY = "BOInXkr23ApUKI2-rsnSuy2oWJWAhrxrlb7Wbdf7pvYaW71GWOZTxjwuFzT3yYhe8mB4wI1YZc_TtV0ay0mrZm4";
@@ -25,6 +33,11 @@ const VAPID_KEY = "BOInXkr23ApUKI2-rsnSuy2oWJWAhrxrlb7Wbdf7pvYaW71GWOZTxjwuFzT3y
  */
 export const requestNotificationPermission = async () => {
   try {
+    if (!messaging) {
+      console.warn('Firebase Messaging not available in this browser');
+      return null;
+    }
+
     console.log('Requesting notification permission...');
     const permission = await Notification.requestPermission();
 
@@ -58,6 +71,10 @@ export const requestNotificationPermission = async () => {
  */
 export const onMessageListener = () =>
   new Promise((resolve) => {
+    if (!messaging) {
+      console.warn('Firebase Messaging not available in this browser');
+      return;
+    }
     onMessage(messaging, (payload) => {
       console.log('Message received in foreground:', payload);
       resolve(payload);
