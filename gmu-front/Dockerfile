@@ -7,10 +7,10 @@ COPY package*.json ./
 
 RUN npm install
 
-ARG API_HOST=localhost
-ARG API_PORT=8443
+ARG API_HOST=
+ARG API_PORT=
 ARG API_BASE=/api
-ARG API_PROTOCOL=https
+ARG API_PROTOCOL=
 
 COPY . .
 

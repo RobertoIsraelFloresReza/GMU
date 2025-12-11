@@ -5,6 +5,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: gmu
+    command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     ports:
       - "3306:3306"
     networks:
@@ -18,11 +19,9 @@ services:
     build:
       context: ./gmu-front
     ports:
-      - "80:443"
+      - "80:80"
     networks:
       - gmu-net
-    volumes:
-      - certbot-certs:/etc/letsencrypt:ro
 
   backend:
     image: services:gmu-v1
@@ -30,27 +29,22 @@ services:
     build:
       context: ./gmu-back
     environment:
-      SERVER_PORT: 8080
-      DB_URL: jdbc:mysql://database:3306/gmu
-      DB_USER: root
-      DB_PASSWORD: root
-      SERVER_SSL_ENABLED: true
-      SERVER_SSL_KEYSTORE: /etc/letsencrypt/live/cokeraws.duckdns.org/keystore.p12
-      SERVER_SSL_KEYSTORE_PASS: COKERKEYSTOREPASS
+      SPRING_PROFILES_ACTIVE: prod
+      SPRING_DATASOURCE_URL: jdbc:mysql://database:3306/gmu
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
       JWT_SECRET: R01VLVBSMFkzQzctU1Q0TVAtMGM1MmZiZDgtMGYxYS00MzliLTkyYWYtMjc4NDYzNzAwNzI4
     ports:
       - "8081:8080"
     networks:
       - gmu-net
-    volumes:
-      - certbot-certs:/etc/letsencrypt:ro
+    depends_on:
+      - database
 
 networks:
   gmu-net:
-    external: true
+    driver: bridge
 
 volumes:
   gmu-data:
-    external: true
-  certbot-certs:
-    external: true
+    driver: local
