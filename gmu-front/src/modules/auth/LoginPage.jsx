@@ -335,7 +335,7 @@ const LoginPage = () => {
                                     <FaStore className="text-3xl sm:text-4xl text-white" />
                                 </motion.div>
                                 <h2 className="text-2xl sm:text-3xl font-black text-gray-800 mb-2">
-                                    Acceso al Sepzo
+                                    Acceso al Sistema
                                 </h2>
                                 <p className="text-sm sm:text-base text-gray-600 font-medium">
                                     Ingresa tus credenciales para continuar
